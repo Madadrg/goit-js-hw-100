@@ -1,5 +1,6 @@
 import axios from 'axios';
 import SlimSelect from 'slim-select/dist/slimselect.min.js';
+import Notiflix from 'notiflix';
 
 document.addEventListener('DOMContentLoaded', async () => {
   const loader = document.querySelector('.loader');
@@ -81,14 +82,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         catInfoDiv.style.display = 'block';
         loader.style.display = 'none';
       })
-      .catch(() => {
-        showError();
+      .catch(error => {
+        showError('Error fetching cat by breed', error);
       });
   });
 
-  function showError() {
-    // Display error and hide loader
-    errorElement.style.display = 'block';
-    loader.style.display = 'none';
+  function showError(message, error) {
+    console.error(message, error);
+    Notiflix.Notify.Failure(message);
   }
 });
