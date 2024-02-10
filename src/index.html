@@ -4,6 +4,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Homework 10</title>
+    <style>
+      .bouncing-loader {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .bouncing-loader div {
+        width: 15px;
+        height: 15px;
+        background-color: #333;
+        border-radius: 50%;
+        margin: 0 5px;
+        animation: bouncing-loader 0.6s infinite alternate;
+      }
+
+      @keyframes bouncing-loader {
+        to {
+          transform: translateY(-15px);
+        }
+      }
+    </style>
+
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/slim-select/dist/slimselect.min.css"
@@ -11,7 +35,7 @@
   </head>
   <body>
     <div class="breed-select"></div>
-    <p class="loader">Loading data, please wait...</p>
+    <div class="bouncing-loader">
     <p class="error">Oops! Something went wrong! Try reloading the page!</p>
     <div class="cat-info"></div>
 
