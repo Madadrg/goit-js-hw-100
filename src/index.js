@@ -60,5 +60,19 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   };
 
+  const fetchBreeds = async () => {
+    try {
+      const response = await fetch('https://api.example.com/breeds');
+      const breeds = await response.json();
+      return breeds;
+    } catch (error) {
+      throw new Error('Failed to fetch cat breeds. Please try again.');
+    }
+  };
+
+  const showError = message => {
+    alert(message);
+  };
+
   initializeApp();
 });
