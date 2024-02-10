@@ -1,3 +1,8 @@
+import axios from 'axios';
+
+axios.defaults.headers.common['x-api-key'] =
+  'live_eTgm5gBQRpLXUYOrde2P3AlGPBuh1gPZqeTkPuv5A9C9WHocz2GIv2lehcU714mt';
+
 // Function to fetch breeds
 export function fetchBreeds() {
   return new Promise(async (resolve, reject) => {
