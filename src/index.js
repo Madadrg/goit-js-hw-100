@@ -1,13 +1,18 @@
 import axios from 'axios';
+import SlimSelect from 'slim-select';
 
-document.addEventListener('DOMContentLoaded', () => {
-  const breedSelect = document.querySelector('.breed-select');
+document.addEventListener('DOMContentLoaded', async () => {
   const loader = document.querySelector('.loader');
   const errorElement = document.querySelector('.error');
   const catInfoDiv = document.querySelector('.cat-info');
 
   axios.defaults.headers.common['x-api-key'] =
     'live_eTgm5gBQRpLXUYOrde2P3AlGPBuh1gPZqeTkPuv5A9C9WHocz2GIv2lehcU714mt';
+
+  const breedSelect = new SlimSelect({
+    select: '.breed-select',
+    placeholder: 'Select a breed',
+  });
 
   function fetchBreeds() {
     return axios
@@ -34,17 +39,17 @@ document.addEventListener('DOMContentLoaded', () => {
   fetchBreeds()
     .then(breeds => {
       breeds.forEach(breed => {
-        const option = document.createElement('option');
-        option.value = breed.id;
-        option.text = breed.name;
-        breedSelect.appendChild(option);
+        breedSelect.addData({
+          text: breed.name,
+          value: breed.id,
+        });
       });
     })
     .catch(() => {
       showError();
     })
     .finally(() => {
-      breedSelect.style.display = 'block';
+      breedSelect.dataValues();
       loader.style.display = 'none';
     });
 
