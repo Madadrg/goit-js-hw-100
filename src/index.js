@@ -1,5 +1,5 @@
 import axios from 'axios';
-import SlimSelect from 'slim-select';
+import SlimSelect from 'slim-select/dist/slimselect.min.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
   const loader = document.querySelector('.loader');
