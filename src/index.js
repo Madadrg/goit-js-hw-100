@@ -1,10 +1,9 @@
 import axios from 'axios';
-import SlimSelect from 'slim-select/dist/slimselect.min.js';
+import SlimSelect from 'slim-select';
 import Notiflix from 'notiflix';
 
 document.addEventListener('DOMContentLoaded', async () => {
   const loader = document.querySelector('.loader');
-  const errorElement = document.querySelector('.error');
   const catInfoDiv = document.querySelector('.cat-info');
 
   axios.defaults.headers.common['x-api-key'] =
@@ -15,48 +14,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     placeholder: 'Select a breed',
   });
 
-  function fetchBreeds() {
-    return axios
-      .get('https://api.thecatapi.com/v1/breeds')
-      .then(response => response.data)
-      .catch(error => {
-        console.error('Error fetching breeds:', error);
-        throw error;
-      });
-  }
-
-  function fetchCatByBreed(breedId) {
-    const url = `https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`;
-    return axios
-      .get(url)
-      .then(response => response.data)
-      .catch(error => {
-        console.error('Error fetching cat by breed:', error);
-        throw error;
-      });
-  }
-
-  // Fetch and populate breed options
-  fetchBreeds()
-    .then(breeds => {
-      breeds.forEach(breed => {
-        breedSelect.addData({
-          text: breed.name,
-          value: breed.id,
-        });
-      });
-    })
-    .catch(() => {
-      showError();
-    })
-    .finally(() => {
-      breedSelect.dataValues();
-      loader.style.display = 'none';
-    });
+  // Rest of your code
 
   // Handle breed selection
-  breedSelect.onChange(info => {
-    const selectedBreedId = info.value();
+  document.querySelector('.breed-select').addEventListener('change', () => {
+    const selectedBreedId = breedSelect.selected();
 
     // Show loader while fetching cat info
     loader.style.display = 'block';
@@ -89,6 +51,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   function showError(message, error) {
     console.error(message, error);
-    Notiflix.Notify.Failure(message);
+    const errorMessage = message || 'An error occurred.';
+    Notiflix.Notify.Failure(errorMessage);
   }
 });
