@@ -55,8 +55,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
   // Handle breed selection
-  breedSelect.addEventListener('change', () => {
-    const selectedBreedId = breedSelect.value;
+  breedSelect.onChange(info => {
+    const selectedBreedId = info.value();
 
     // Show loader while fetching cat info
     loader.style.display = 'block';
